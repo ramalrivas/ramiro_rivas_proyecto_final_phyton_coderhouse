@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="Seccion de Eventos - Indumentaria Marcial" />
+            <meta name="author" content="Ramiro L. Rivas" />
+            <title>Indumentaria Marcial - Camisas</title>
+            <!-- Favicon-->
+            <link rel="icon" type="image/x-icon" href="{% static 'coder_app/assets/favicon.ico' %}" />
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <link href="{% static 'coder_app/css/styles.css' %}" rel="stylesheet" />
+        </head>
+
+<body>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="form-container">
+        <p><a href="{% url 'indumentaria' %}" class="button button-inicio">Inicio</a></p>
+        <h2>Galería de Camisas</h2>
+    </div>
+
+    <div class="gallery">
+        {% for image in images %}
+            <div class="image-wrapper">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                {% if request.user.is_staff %}
+                    <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_camisa.as_p }}
+            <button type="submit" name="submit_camisa" class="button">Subir Imagen de Camisa</button>
+        </form>
+    </div>
+</body>
+</html>

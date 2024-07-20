@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Eventos Streetwear - StreetHouse</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'coder_app/assets/favicon.ico' %}"/>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('{% static "coder_app/assets/img/Green.jpg" %}'); /* Ajusta la ruta según tu estructura de carpetas */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff; /* Ajusta el color del texto para que sea legible sobre la imagen de fondo */
+        }
+
+        header {
+            text-align: center;
+            margin: 20px 0; /* Ajustar según sea necesario */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0); /* Fondo completamente transparente */
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        nav ul li ul li {
+            display: block;
+            margin: 10px 0;
+        }
+
+        nav a {
+            color: #fff; /* Ajusta el color del enlace */
+            text-decoration: none;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Eventos</h1>
+        <nav>
+            <ul>
+              
+                <li><a href={% url 'index' %}>Volver al Inicio</a></li>
+
+              
+                <li><a href="#">Carteleras</a>
+                    <ul>
+                        
+                        <li><a href="{% url 'carteleras' %}">MGM Arena</a></li>
+                    </ul>
+                </li>
+                
+                
+                </li>
+                <li><a href="#">Eventos Olimpicos</a>
+                    <ul>
+                        <li><a href="{% url 'galerias' %}">Paris 2024</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+   
+</body>
+</html>
+

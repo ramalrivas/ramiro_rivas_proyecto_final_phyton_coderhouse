@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remeras</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7; /* O el color de fondo que prefieras */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            width: 100%;
+            max-width: 1200px; /* O el ancho máximo que prefieras */
+            margin-bottom: 20px;
+        }
+
+        .image-wrapper {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 50px; /* Agrega espacio en la parte inferior */
+            position: relative; 
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-wrapper img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-wrapper a {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 5px 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button-eliminar {
+            display: block; /* O inline-block, dependiendo de cómo quieras que se comporte el botón */
+            text-align: center; 
+            background-color: #f44336; /* Rojo para eliminar */
+            position: absolute; /* Posiciona absolutamente dentro de image-wrapper */
+            bottom: 10px; /* Distancia desde la parte inferior del contenedor */
+            left: 50%; /* Centra horizontalmente */
+            transform: translateX(-50%); /* Desplazamiento para centrar exactamente */
+        }
+
+        .button-eliminar:hover {
+            background-color: #d32f2f;
+        }
+
+        .button-inicio {
+            background-color: #008CBA;
+        }
+
+        .button-inicio:hover {
+            background-color: #007ba7;
+        }
+
+        .form-container {
+            text-align: center;
+            width: 100%;
+            max-width: 1200px; /* O el ancho máximo que prefieras */
+        }
+
+        .form-container form {
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="form-container">
+        <p><a href="{% url 'indumentaria' %}" class="button button-inicio">Inicio</a></p>
+        <h2>Galería de Remeras</h2>
+    </div>
+
+    <div class="gallery">
+        {% for image in images %}
+            <div class="image-wrapper">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                {% if request.user.is_staff %}
+                    <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_remera.as_p }}
+            <button type="submit" name="submit_remera" class="button">Subir Imagen de Remera</button>
+        </form>
+    </div>
+</body>
+</html>
