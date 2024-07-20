@@ -19,9 +19,6 @@ def index(request):
 def indumentaria(request):
     return render(request, 'coder_app/indumentaria.html')
 
-def ropa_femenina(request):
-    return render(request, 'coder_app/ropa-femenina.html')
-
 def eventos(request):
     return render(request, 'coder_app/eventos.html')
 
@@ -42,26 +39,6 @@ def botas(request):
         form_botas = ImageUploadForm()
         images_botas = Image.objects.filter(category='botas')  
     return render(request, 'coder_app/botas.html', {'images': images_botas, 'form_botas': form_botas})
-pass
-
-@login_required (login_url='index')
-def camisas(request):
-    if request.method == 'POST' and 'submit_camisa' in request.POST:
-        form_camisa = ImageUploadForm(request.POST, request.FILES)
-        if form_camisa.is_valid():
-            image = form_camisa.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'camisas'  
-            image.save()
-            messages.success(request, 'Imagen de camisa subida correctamente.')
-            return redirect('camisas')
-        else:
-            messages.error(request, 'Error al subir la imagen de camisa.')
-    else:
-        form_camisa = ImageUploadForm()
-
-    images_camisas = Image.objects.filter(category='camisas')
-    return render(request, 'coder_app/camisas.html', {'images': images_camisas, 'form_camisa': form_camisa})
 pass
 
 @login_required (login_url='index')
@@ -186,165 +163,24 @@ def zapatillas(request):
     return render(request, 'coder_app/zapatillas.html', {'images': images_zapatillas, 'form_zapatillas': form_zapatillas})
 pass
 
-
 @login_required (login_url='index')
-def botasf(request):
-    if request.method == 'POST' and 'submit_botasf' in request.POST:
-        form_botasf = ImageUploadForm(request.POST, request.FILES)
-        if form_botasf.is_valid():
-            image = form_botasf.save(commit=False)
+def galerias(request):
+    if request.method == 'POST' and 'submit_galerias' in request.POST:
+        form_galerias = ImageUploadForm(request.POST, request.FILES)
+        if form_galerias.is_valid():
+            image = form_galerias.save(commit=False)
             image.uploaded_by = request.user
-            image.category = 'botasf'
+            image.category = 'galerias'
             image.save()
-            messages.success(request, 'Imagen de botas subida correctamente.')
-            return redirect('botasf')
+            messages.success(request, 'Imagen de galeria subida correctamente.')
+            return redirect('galerias')
         else:
             messages.error(request, 'Error al subir la imagen de hoodie.')
     else:
-        form_botasf = ImageUploadForm()
+        form_galerias = ImageUploadForm()
     
-    images_botasf = Image.objects.filter(category='botasf')
-    return render(request, 'coder_app/botasf.html', {'images': images_botasf, 'form_botasf': form_botasf})
-pass
-
-@login_required (login_url='index')
-def blusas(request):
-    if request.method == 'POST' and 'submit_blusas' in request.POST:
-        form_blusas = ImageUploadForm(request.POST, request.FILES)
-        if form_blusas.is_valid():
-            image = form_blusas.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'blusas'
-            image.save()
-            messages.success(request, 'Imagen de blusa subida correctamente.')
-            return redirect('blusas')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_blusas = ImageUploadForm()
-    
-    images_blusas = Image.objects.filter(category='blusas')
-    return render(request, 'coder_app/blusas.html', {'images': images_blusas, 'form_blusas': form_blusas})
-pass
-
-@login_required (login_url='index')
-def camperasf(request):
-    if request.method == 'POST' and 'submit_camperasf' in request.POST:
-        form_camperasf = ImageUploadForm(request.POST, request.FILES)
-        if form_camperasf.is_valid():
-            image = form_camperasf.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'camperasf'
-            image.save()
-            messages.success(request, 'Imagen de campera subida correctamente.')
-            return redirect('camperasf')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_camperasf = ImageUploadForm()
-    
-    images_camperasf = Image.objects.filter(category='camperasf')
-    return render(request, 'coder_app/camperasf.html', {'images': images_camperasf, 'form_camperasf': form_camperasf})
-pass
-
-@login_required (login_url='index')
-def faldas(request):
-    if request.method == 'POST' and 'submit_faldas' in request.POST:
-        form_faldas = ImageUploadForm(request.POST, request.FILES)
-        if form_faldas.is_valid():
-            image = form_faldas.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'faldas'
-            image.save()
-            messages.success(request, 'Imagen de falda subida correctamente.')
-            return redirect('faldas')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_faldas = ImageUploadForm()
-    
-    images_faldas = Image.objects.filter(category='faldas')
-    return render(request, 'coder_app/faldas.html', {'images': images_faldas, 'form_faldas': form_faldas})
-pass
-
-@login_required (login_url='index')
-def pantalonesf(request):
-    if request.method == 'POST' and 'submit_pantalonesf' in request.POST:
-        form_pantalonesf = ImageUploadForm(request.POST, request.FILES)
-        if form_pantalonesf.is_valid():
-            image = form_pantalonesf.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'pantalonesf'
-            image.save()
-            messages.success(request, 'Imagen de pantalon subida correctamente.')
-            return redirect('pantalonesf')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_pantalonesf = ImageUploadForm()
-    
-    images_pantalonesf = Image.objects.filter(category='pantalonesf')
-    return render(request, 'coder_app/pantalonesf.html', {'images': images_pantalonesf, 'form_pantalonesf': form_pantalonesf})
-pass
-
-@login_required (login_url='index')
-def vestidos(request):
-    if request.method == 'POST' and 'submit_vestidos' in request.POST:
-        form_vestidos = ImageUploadForm(request.POST, request.FILES)
-        if form_vestidos.is_valid():
-            image = form_vestidos.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'vestidos'
-            image.save()
-            messages.success(request, 'Imagen de vestido subida correctamente.')
-            return redirect('vestidos')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_vestidos = ImageUploadForm()
-    
-    images_vestidos = Image.objects.filter(category='vestidos')
-    return render(request, 'coder_app/vestidos.html', {'images': images_vestidos, 'form_vestidos': form_vestidos})
-pass
-	
-@login_required (login_url='index')
-def shortsf(request):
-    if request.method == 'POST' and 'submit_shortsf' in request.POST:
-        form_shortsf = ImageUploadForm(request.POST, request.FILES)
-        if form_shortsf.is_valid():
-            image = form_shortsf.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'shortsf'
-            image.save()
-            messages.success(request, 'Imagen de short subida correctamente.')
-            return redirect('shortsf')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_shortsf = ImageUploadForm()
-    
-    images_shortsf = Image.objects.filter(category='shortsf')
-    return render(request, 'coder_app/shortsf.html', {'images': images_shortsf, 'form_shortsf': form_shortsf})
-pass
-
-@login_required (login_url='index')
-def zapatillasf(request):
-    if request.method == 'POST' and 'submit_zapatillasf' in request.POST:
-        form_zapatillasf = ImageUploadForm(request.POST, request.FILES)
-        if form_zapatillasf.is_valid():
-            image = form_zapatillasf.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'zapatillasf'
-            image.save()
-            messages.success(request, 'Imagen de zapatillas subida correctamente.')
-            return redirect('zapatillasf')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_zapatillasf = ImageUploadForm()
-    
-    images_zapatillasf = Image.objects.filter(category='zapatillasf')
-    return render(request, 'coder_app/zapatillasf.html', {'images': images_zapatillasf, 'form_zapatillasf': form_zapatillasf})
+    images_galerias = Image.objects.filter(category='galerias')
+    return render(request, 'coder_app/galerias.html', {'images': images_galerias, 'form_galerias': form_galerias})
 pass
 
 @login_required (login_url='index')
@@ -366,28 +202,6 @@ def carteleras(request):
     images_carteleras = Image.objects.filter(category='carteleras')
     return render(request, 'coder_app/carteleras.html', {'images': images_carteleras, 'form_carteleras': form_carteleras})
 pass
-	
-
-@login_required (login_url='index')
-def galerias(request):
-    if request.method == 'POST' and 'submit_galerias' in request.POST:
-        form_galerias = ImageUploadForm(request.POST, request.FILES)
-        if form_galerias.is_valid():
-            image = form_galerias.save(commit=False)
-            image.uploaded_by = request.user
-            image.category = 'galerias'
-            image.save()
-            messages.success(request, 'Imagen de galeria subida correctamente.')
-            return redirect('galerias')
-        else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
-    else:
-        form_galerias = ImageUploadForm()
-    
-    images_galerias = Image.objects.filter(category='galerias')
-    return render(request, 'coder_app/galerias.html', {'images': images_galerias, 'form_galerias': form_galerias})
-pass
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -420,7 +234,6 @@ def user_logout(request):
     messages.info(request, 'Has cerrado sesión exitosamente.')
     return redirect('index')
 
-
 @login_required
 def upload_image_view(request):
     if request.method == 'POST':
@@ -450,9 +263,7 @@ def delete_image(request, pk):
     messages.success(request, 'Imagen eliminada correctamente.')
 
       
-    if category == 'camisas':
-        return redirect('camisas')
-    elif category == 'remeras':
+    if category == 'remeras':
         return redirect('remeras')
     
     if category == 'hoodies':
@@ -470,30 +281,9 @@ def delete_image(request, pk):
     elif category == 'botas':
         return redirect('botas')   
 
-    if category == 'blusas':
-        return redirect('blusas')
-    elif category == 'botasf':
-        return redirect('botasf')
-    
-    if category == 'camperasf':
-        return redirect('camperasf')
-    elif category == 'faldas':
-        return redirect('faldas')
-    
-    if category == 'pantalonesf':
-        return redirect('pantalonesf')
-    elif category == 'shortsf':
-        return redirect('shortsf')
-    
-    if category == 'zapatillasf':
-        return redirect('zapatillasf')
-    elif category == 'vestidos':
-        return redirect('vestidos')
-    
     if category == 'carteleras':
         return redirect('carteleras')
     elif category == 'galerias':
         return redirect('galerias')
-    
     else:
         return redirect('index')

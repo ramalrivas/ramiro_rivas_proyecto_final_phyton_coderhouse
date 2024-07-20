@@ -2,104 +2,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Contenido Marcial - Indumentaria</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            margin: 0;
-           background-image: url('{% static "coder_app/assets/img/Black Orange.jpg" %}'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #fff; /* Ajusta el color del texto para que sea legible sobre la imagen de fondo */
-        }
-
-        header {
-            text-align: center;
-            margin: 20px 0; /* Ajustar según sea necesario */
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li {
-            position: relative;
-        }
-
-        nav ul li ul {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0); 
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        nav ul li:hover ul {
-            display: block;
-        }
-
-        nav ul li ul li {
-            display: block;
-            margin: 10px 0;
-        }
-
-        nav a {
-            color: #fff; /* Ajusta el color del enlace */
-            text-decoration: none;
-        }
-    </style>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Seccion de Eventos - Indumentaria Marcial" />
+        <meta name="author" content="Ramiro L. Rivas" />
+        <title>Indumentaria Marcial - Eventos</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'coder_app/assets/favicon.ico' %}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'coder_app/css/styles.css' %}" rel="stylesheet" />
+    </head>
 </head>
 <body>
-    <header>
-        <h1>Indumentaria</h1>
-        <nav>
-            <ul>
-                
-                <li><a href="{% url 'index' %}">Volver al Inicio</a></li>
-                
-                              
-                <li><a href="#">Indumentaria</a>
-                    <ul>
-                        <li><a href="{% url 'camisas' %}">Camisas</a></li>
-                        <li><a href="{% url 'remeras' %}">Remeras</a></li>
-                        <li><a href="{% url 'hoodies' %}">Hoodie</a></li>
-                        <li><a href="{% url 'pantalones' %}">Pantalones</a></li>
-                        <li><a href="{% url 'shorts' %}">Shorts</a></li>
-                        <li><a href="{% url 'camperas' %}">Camperas</a></li>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Contenido Marcial - Indumentaria</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'index' %}><< Volver</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Indumentaria</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'remeras' %}">Remeras</a></li>
+                                <li><a class="dropdown-item" href="{% url 'hoodies' %}">Buzos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'pantalones' %}">Pantalones</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shorts' %}">Shorts</a></li>
+                                <li><a class="dropdown-item" href="{% url 'camperas' %}">Camperas</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Calzado</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'zapatillas' %}">Zapatillas</a></li>
+                                <li><a class="dropdown-item" href="{% url 'botas' %}">Botas</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-                
-                <li><a href="#">Calzado</a>
-                    <ul>
-                        <li><a href="{% url 'zapatillas' %}">Zapatillas</a></li>
-                        <li><a href="{% url 'botas' %}">Botas</a></li>
-                       
-                    </ul>
-                </li>
-            </ul>
+                </div>
+            </div>
         </nav>
-    </header>
-    
+        <!-- Page content-->
+        <div class="container">
+            <div class="text-center mt-5">
+                <h1>Indumentaria Técnica</h1>
+                <p class="lead">Navega a traves de nuestro contenido y descubrí la indumentaria que mejor se amolda a tu Disciplina o Deporte.
+                </p>
+                <p>Bootstrap v5.2.3</p>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
 </body>
 </html>

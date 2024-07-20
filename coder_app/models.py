@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 class Image(models.Model):
     CATEGORY_CHOICES = (
-        ('camisas', 'Camisas'),
         ('remeras', 'Remeras'),
         ('hoodies', 'Hoodies'),
         ('pantalones', 'Pantalones'),
@@ -11,14 +10,6 @@ class Image(models.Model):
         ('camperas', 'Camperas'),
         ('zapatillas', 'Zapatillas'),
         ('botas', 'Botas'),
-        ('blusas', 'Blusas'),
-        ('vestidos', 'Vestidos'),
-        ('faldas', 'Faldas'),
-        ('pantalonesf', 'Pantalonesf'),
-        ('shortsf', 'Shortsf'),
-        ('camperasf', 'Camperasf'),
-        ('zapatillasf', 'Zapatillasf'),
-        ('botasf', 'Botasf'),
         ('carteleras', 'carteleras'),
         ('galerias', 'Galerias'),
         

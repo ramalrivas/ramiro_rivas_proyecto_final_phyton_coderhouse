@@ -9,7 +9,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('coder_app/', include('coder_app.urls')),  # Agrega esta línea
+    path('coder_app/', include('coder_app.urls')),
     path('', views.index, name='home'),
     path('logout/', coder_views.user_logout, name='logout'),
     path('upload/', views.upload_image_view, name='upload_image_view'),

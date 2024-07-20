@@ -77,13 +77,13 @@
         }
 
         .button-eliminar {
-            display: block; /* O inline-block, dependiendo de cómo quieras que se comporte el botón */
+            display: block; 
             text-align: center; 
-            background-color: #f44336; /* Rojo para eliminar */
-            position: absolute; /* Posiciona absolutamente dentro de image-wrapper */
-            bottom: 10px; /* Distancia desde la parte inferior del contenedor */
-            left: 50%; /* Centra horizontalmente */
-            transform: translateX(-50%); /* Desplazamiento para centrar exactamente */
+            background-color: #f44336;
+            position: absolute; 
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%); 
         }
 
         .button-eliminar:hover {
@@ -122,7 +122,7 @@
     {% endif %}
 
     <div class="form-container">
-        <p><a href="{% url 'indumentaria' %}" class="button button-inicio">Inicio</a></p>
+        <p><a href="{% url 'indumentaria' %}" class="button button-inicio"><< Volver</a></p>
         <h2>Galería de Zapatillas</h2>
     </div>
 
