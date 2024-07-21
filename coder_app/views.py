@@ -240,7 +240,7 @@ def delete_image(request, pk):
 
 def loginRequest(request):
     if request.method == "POST":
-        miForm = AuthenticationForm(data=request.POST)
+        miForm = CustomAuthenticationForm(data=request.POST)
         if miForm.is_valid():
             username = miForm.cleaned_data.get('username')
             password = miForm.cleaned_data.get('password')

@@ -10,14 +10,14 @@
   
     <link rel="icon" type="image/x-icon" href="{% static 'coder_app/assets/favicon.ico' %}"/>
 
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-   
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static '\coder_app\css\styles.css' %}" rel="stylesheet" />
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
 
 </head>
 
@@ -34,34 +34,31 @@
                     <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
                     <li class="nav-item"><a class="nav-link" href="#creator">Creador</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <p style="color:green" class="nav-link">[{{ user.first_name }} {{ user.last_name }}]</p>
-                        </li>
-                        <li class="nav-item">
-                            <div class="text-center">
-                                <a href="{% url 'agregar_avatar' %}">
-                                    <img src="{{ request.session.avatar }}" height="40px" width="40px" alt="mi foto" class="rounded-circle">
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item"><a class="btn btn-success nav-link" href="{% url 'perfil' %}">Perfil</a></li>
-                        <li class="nav-item">
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                            <button type="submit" class="btn btn-primary nav-link">Cerrar Sesión</button>
-                        </form></li>
-                    {% else %}
-                        <li class="nav-item"><button class="btn btn-primary nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button></li>
-                        <li class="nav-item"><button class="btn btn-success nav-link" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTRATE</button></li>
-                    {% endif %}
                 </ul>
+                
+                <div class="d-flex ms-auto align-items-center">
+                    {% if user.is_authenticated %}
+                        <p class="mb-0 me-3" style="color:green">[{{ user.first_name }} {{ user.last_name }}]</p>
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary me-2">Logout</button>
+                        </form>
+                    {% else %}
+                        <a class="btn btn-primary me-2" href="{% url 'login' %}">Login</a>
+                        <a class="btn btn-success" href="{% url 'registro' %}">Registrate</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
-    
-        <header class="masthead">
-            <div class="container">
+                            <!-- Bloque Dinamico -->
+
+                            {% block contenido %}
+                    
+                            {% endblock contenido %}  
+                            
+                            <!-- Bloque Dinamico -->
+    <header class="masthead">
                 <div class="masthead-subheading">Bienvenido a Contenido Marcial</div>
                 <div class="masthead-heading text-uppercase">EL OBJETIVO ES CLARO...</div>
                 
@@ -69,15 +66,17 @@
             </div>
         </header>
        
-<section class="page-section" id="secciones">
-    <div class="container">
-        <div class="text-center">
-           
-            <h2 class="section-heading text-uppercase">Contenido Exclusivo</h2>
+    <section class="page-section" id="secciones">
+        <div class="container">
+            <div class="text-center">
+        <div class="container">
+            <div class="text-center">
+                
+                <h2 class="section-heading text-uppercase">Contenido Exclusivo</h2>
             
-            <h3 class="section-subheading text-muted">En esta sección conoceras el equipamiento e indumentaria, que luego de un proceso de seleccion, es el recomendado para tu Diciplina o Deporte.
+                <h3 class="section-subheading text-muted">En esta sección conoceras el equipamiento e indumentaria, que luego de un proceso de seleccion, es el recomendado para tu Diciplina o Deporte.
                 Por otro lado, existe una sección dedicada en exclusiva para que conozcas los eventos mas importantes de este apasionante mundo!.</h3>
-        </div>
+            </div>
         <div class="row text-center">
             <div class="col-md-4">
                 <a href="{% url 'indumentaria' %}">  
@@ -375,55 +374,15 @@
             </div>
         </div>        
     
-        <!-- Login Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Inicia Sesión</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'login' %}" method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Login</button>
-                            </div>  
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Register Modal -->
-        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Formulario de Registro.</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'registro' %}" method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success">Confirmar Datos</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        
-        <script src="{% static 'coder_app/js/scripts.js' %}"></script>
-        
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script
 
 </body>
 </html>

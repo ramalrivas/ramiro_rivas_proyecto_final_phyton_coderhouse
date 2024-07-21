@@ -2,7 +2,7 @@ from django import forms
 from .models import Image
 from django import forms 
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm 
 
 
 class ImageUploadForm(forms.ModelForm):
@@ -10,9 +10,10 @@ class ImageUploadForm(forms.ModelForm):
         model = Image  
         fields = ['image'] 
 
-# ----- Inicio Sesion, Registro, Avatar
+# Login, Registro y Avatar.
 
 class RegistroForm(UserCreationForm):
+    username = forms.CharField(label="Usuario", max_length=150, required=True)
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Contraseña a confirmar", widget=forms.PasswordInput)
@@ -20,6 +21,15 @@ class RegistroForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Usuario",
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    password = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )
 
 class UserEditForm(UserChangeForm):
     email = forms.EmailField(required=True)
@@ -31,4 +41,4 @@ class UserEditForm(UserChangeForm):
         fields = ["email", "first_name", "last_name"]
 
 class AvatarForm(forms.Form):
-    imagen = forms.ImageField(required=True)
+    imagen = forms.ImageField(label="Avatar", required=True)

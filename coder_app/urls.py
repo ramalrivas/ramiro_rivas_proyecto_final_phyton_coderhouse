@@ -31,7 +31,7 @@ urlpatterns = [
     # Inicia Sesión, Registro, Log-Out
     
     path('login/', loginRequest, name="login"),
-    path('logout/', LogoutView.as_view(template_name="sessions/logout.html"), name="logout"),
+    path('logout/', LogoutView.as_view(), name="logout"),
     path('registro/', register, name="registro"),
 
     #___ Edición de Perfil / Avatar

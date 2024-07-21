@@ -1,14 +1,35 @@
 {% extends "index.html" %}
 
-{% block titulo %}
-<h1 class="mb-5">Inicia Sesión</h1>                                
-{% endblock titulo %}
+{% block contenido %}
+<div id="login-container" class="border p-4 bg-light rounded shadow position-fixed bottom-0 end-0 m-3" style="width: 300px;">
+    <h2 class="mb-4 text-center" style="color: black;">Iniciar Sesión</h2>
+    <form id="login-form" action="" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            <div class="invalid-feedback">
+                Por favor ingresa tu nombre de usuario.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            <div class="invalid-feedback">
+                Por favor ingresa tu contraseña.
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-secondary" onclick="hideLoginForm()">Cancelar</button>
+        </div>
+    </form>
+</div>
 
-{% block contenido %}   
-
-<form action="{% url 'login' %}" method="POST">
-    {% csrf_token %}
-    {{ loginForm.as_table }}
-    <button type="submit">Login</button>
-</form>
+<script>
+function hideLoginForm() {
+    document.getElementById('login-container').style.display = 'none';
+}
+</script>
 {% endblock contenido %}
+
