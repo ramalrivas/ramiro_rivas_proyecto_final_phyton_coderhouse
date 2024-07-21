@@ -22,3 +22,12 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title if self.title else f"Image {self.id}"
+    
+
+#-------------------------
+class Avatar(models.Model):   
+    imagen = models.ImageField(upload_to="avatares") 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} {self.imagen}"  

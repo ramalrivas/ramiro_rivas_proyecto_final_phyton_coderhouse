@@ -9,107 +9,68 @@
     <title>Contenido Marcial</title>
   
     <link rel="icon" type="image/x-icon" href="{% static 'coder_app/assets/favicon.ico' %}"/>
-   
+
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
    
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-   
     <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
 </head>
 
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-
-
-    {% if request.user.is_authenticated %}
-        
-        <div class="user-info">
-            <span style="color: white;">Hola, {{ request.user.username }}</span>
-            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
-           
-                {% csrf_token %}
-           
-            </form>
-        
-             <a href="javascript:;" onclick="document.getElementById('logout-form').submit();">Cerrar sesión</a>
-        </div>
-
-    {% endif %}
-    
-    {% if not request.user.is_authenticated %}
-        <script type="text/javascript">
-            $(document).ready(function(){
-                var next = new URLSearchParams(window.location.search).get('next');
-                if (next) {
-                    $('#ingresoModal').modal('show');
-                    
-                    $("#ingresoModal .modal-body").prepend("<div class='alert alert-warning'>Debes iniciar sesión para ver la página solicitada.</div>");
-                }
-            });
-        </script>
-    {% endif %}
-
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
                 <i class="fas fa-bars ms-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#secciones">Secciones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#portfolio">Los mas recomendados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Los más recomendados</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
                     <li class="nav-item"><a class="nav-link" href="#creator">Creador</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#loginModal" data-bs-toggle="modal" data-bs-target="#ingresoModal">Ingresar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#registroModal" data-bs-toggle="modal" data-bs-target="#registroModal">Registro</a></li>
-
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <p style="color:green" class="nav-link">[{{ user.first_name }} {{ user.last_name }}]</p>
+                        </li>
+                        <li class="nav-item">
+                            <div class="text-center">
+                                <a href="{% url 'agregar_avatar' %}">
+                                    <img src="{{ request.session.avatar }}" height="40px" width="40px" alt="mi foto" class="rounded-circle">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="btn btn-success nav-link" href="{% url 'perfil' %}">Perfil</a></li>
+                        <li class="nav-item"><a class="btn btn-primary nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><button class="btn btn-primary nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button></li>
+                        <li class="nav-item"><button class="btn btn-success nav-link" data-bs-toggle="modal" data-bs-target="#registerModal">REGISTRATE</button></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-           
+    
         <header class="masthead">
             <div class="container">
                 <div class="masthead-subheading">Bienvenido a Contenido Marcial</div>
                 <div class="masthead-heading text-uppercase">EL OBJETIVO ES CLARO...</div>
                 
                 <a class="btn btn-primary btn-xl text-uppercase" href="#secciones">Contenido Exclusivo</a>
-                <p>
-                    {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-        {% if message.tags == 'success' %}
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    $('#ingresoModal').modal('show');
-                    // Ocultar el mensaje después de 5 segundos (5000 ms)
-                    setTimeout(function() {
-                        $('.alert').fadeOut('slow', function() {
-                            $(this).remove();
-                        });
-                    }, 5000);
-                });
-            </script>
-        {% endif %}
-    {% endfor %}
-{% endif %}
-                </p>  
             </div>
         </header>
        
 <section class="page-section" id="secciones">
     <div class="container">
         <div class="text-center">
+           
             <h2 class="section-heading text-uppercase">Contenido Exclusivo</h2>
+            
             <h3 class="section-subheading text-muted">En esta sección conoceras el equipamiento e indumentaria, que luego de un proceso de seleccion, es el recomendado para tu Diciplina o Deporte.
                 Por otro lado, existe una sección dedicada en exclusiva para que conozcas los eventos mas importantes de este apasionante mundo!.</h3>
         </div>
@@ -409,97 +370,52 @@
                 </div>
             </div>
         </div>        
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Register Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Registración</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'registro' %}" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-success">Registrarse</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         
         <script src="{% static 'coder_app/js/scripts.js' %}"></script>
         
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-
-<!-- Modal de Login -->
-<div class="modal fade" id="ingresoModal" tabindex="-1" aria-labelledby="ingresoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ingresoModalLabel">Inicia Ssesión</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Formulario de ingreso -->
-                <form method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su usuario" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ingresar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de Registro -->
-<div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registroModalLabel">Formulario de Registro.</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-             {% if form.errors %}
-
-                    <div class="alert alert-danger">
-                        <strong>Error al registrar:</strong>
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <p>{{ error|escape }}</p>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for error in form.non_field_errors %}
-                            <p>{{ error|escape }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
-                <!-- Formulario de registro -->
-                <form method="post" action="{% url 'register' %}" novalidate> 
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Nombre de Usuario</label>
-                         <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="first_name" placeholder="Ingrese su nombre" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="last_name" placeholder="Ingrese su apellido" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo electrónico" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Ingrese su contraseña" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password2" class="form-label">Confirmar Contraseña</label>
-                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirme su contraseña" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>

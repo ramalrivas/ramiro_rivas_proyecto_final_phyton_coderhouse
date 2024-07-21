@@ -1,16 +1,20 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
-from .forms import ImageUploadForm
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-from django.contrib.auth import logout
+from .forms import *
+from .models import *
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import PasswordChangeView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
 from .models import Image
-from django.urls import reverse
-from django.contrib.auth import logout
+
 
 
 def index(request):
@@ -203,36 +207,6 @@ def carteleras(request):
     return render(request, 'coder_app/carteleras.html', {'images': images_carteleras, 'form_carteleras': form_carteleras})
 pass
 
-def user_login(request):
-    if request.method == 'POST':
-        print("Login Data:", request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')
-        else:
-           
-            return render(request, 'index.html', {'error': 'Usuario o contraseña incorrectos'})
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Registro exitoso. Por favor, inicia sesión.')
-            return redirect('index')
-        else:
-            print(form.errors)  
-    else:
-        form = UserCreationForm()
-    return render(request, 'index.html', {'form': form})
-
-def user_logout(request):
-    logout(request)
-    messages.info(request, 'Has cerrado sesión exitosamente.')
-    return redirect('index')
 
 @login_required
 def upload_image_view(request):
@@ -261,6 +235,96 @@ def delete_image(request, pk):
     category = image.category  
     image.delete()
     messages.success(request, 'Imagen eliminada correctamente.')
+
+# Incio de Sesión, Registro y Avatar
+
+def loginRequest(request):
+    if request.method == "POST":
+        usuario = request.POST["username"]
+        clave = request.POST["password"]
+        user = authenticate(request, username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+
+            #_______ Buscar Avatar
+            try:
+                avatar = Avatar.objects.get(user=request.user.id).imagen.url
+            except:
+                avatar = "/media/avatares/default.png"
+            finally:
+                request.session["avatar"] = avatar
+            #______________________________________________________________
+            return render(request, "coder_app/index.html")
+        else:
+            return redirect(reverse_lazy('login'))
+
+    else:
+        miForm = AuthenticationForm()
+
+    return render(request, "sessions/login.html", {"form": miForm})
+
+def register(request):
+    if request.method == "POST":
+        miForm = RegistroForm(request.POST)
+        if miForm.is_valid():
+            #usuario = miForm.cleaned_data.get("username")
+            miForm.save()
+            return redirect(reverse_lazy('home'))
+    else:
+        miForm = RegistroForm()
+
+    return render(request, "sessions/registro.html", {"form": miForm})   
+
+# ____ Edición de Perfil / Avatar
+
+@login_required
+def editProfile(request):
+    usuario = request.user
+    if request.method == "POST":
+        miForm = UserEditForm(request.POST)
+        if miForm.is_valid():
+            user = User.objects.get(username=usuario)
+            user.email = miForm.cleaned_data.get("email")
+            user.first_name = miForm.cleaned_data.get("first_name")
+            user.last_name = miForm.cleaned_data.get("last_name")
+            user.save()
+            return redirect(reverse_lazy("home"))
+    else:
+        miForm = UserEditForm(instance=usuario)
+    return render(request, "entidades/editarPerfil.html", {"form": miForm})
+    
+class CambiarClave(LoginRequiredMixin, PasswordChangeView):
+    template_name = "entidades/cambiar_clave.html"
+    success_url = reverse_lazy("home")
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        miForm = AvatarForm(request.POST, request.FILES)
+        if miForm.is_valid():
+            usuario = User.objects.get(username=request.user)
+            imagen = miForm.cleaned_data["imagen"]
+            #_________ Borrar avatares viejos
+            avatarViejo = Avatar.objects.filter(user=usuario)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            #__________________________________________
+            avatar = Avatar(user=usuario, imagen=imagen)
+            avatar.save()
+
+            #_________ Enviar la imagen al home
+            imagen = Avatar.objects.get(user=usuario).imagen.url
+            request.session["avatar"] = imagen
+            #____________________________________________________
+            return redirect(reverse_lazy("home"))
+    else:
+        miForm = AvatarForm()
+    return render(request, "entidades/agregarAvatar.html", {"form": miForm})  
+
+
+
+#--------------------------------------------------------------------------
 
       
     if category == 'remeras':
