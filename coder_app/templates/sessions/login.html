@@ -1,15 +1,14 @@
 {% extends "index.html" %}
 
 {% block titulo %}
-<h1 class="mb-5">Login</h1>                                
+<h1 class="mb-5">Inicia Sesión</h1>                                
 {% endblock titulo %}
 
 {% block contenido %}   
-<form action="" method="post">
+
+<form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Login">
+    {{ loginForm.as_table }}
+    <button type="submit">Login</button>
 </form>
 {% endblock contenido %}

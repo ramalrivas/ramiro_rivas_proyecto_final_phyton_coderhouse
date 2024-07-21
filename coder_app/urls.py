@@ -28,10 +28,10 @@ urlpatterns = [
     path('eventos/carteleras/', views.carteleras, name='carteleras'),  
     path('eventos/galerias/', views.galerias, name='galerias'),  
 
-    #Login/Logout
-    #___ Login / Logout / Registration
+    # Inicia Sesión, Registro, Log-Out
+    
     path('login/', loginRequest, name="login"),
-    path('logout/', LogoutView.as_view(template_name="entidades/logout.html"), name="logout"),
+    path('logout/', LogoutView.as_view(template_name="sessions/logout.html"), name="logout"),
     path('registro/', register, name="registro"),
 
     #___ Edición de Perfil / Avatar

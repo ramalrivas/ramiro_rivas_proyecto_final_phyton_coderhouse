@@ -240,42 +240,35 @@ def delete_image(request, pk):
 
 def loginRequest(request):
     if request.method == "POST":
-        usuario = request.POST["username"]
-        clave = request.POST["password"]
-        user = authenticate(request, username=usuario, password=clave)
-        if user is not None:
-            login(request, user)
-
-            #_______ Buscar Avatar
-            try:
-                avatar = Avatar.objects.get(user=request.user.id).imagen.url
-            except:
-                avatar = "/media/avatares/default.png"
-            finally:
-                request.session["avatar"] = avatar
-            #______________________________________________________________
-            return render(request, "coder_app/index.html")
+        miForm = AuthenticationForm(data=request.POST)
+        if miForm.is_valid():
+            username = miForm.cleaned_data.get('username')
+            password = miForm.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')  
+            else:
+                messages.error(request, "Usuario o contraseña incorrectos")
         else:
-            return redirect(reverse_lazy('login'))
-
+            messages.error(request, "Formulario no válido")
     else:
         miForm = AuthenticationForm()
-
+    
     return render(request, "sessions/login.html", {"form": miForm})
 
 def register(request):
     if request.method == "POST":
         miForm = RegistroForm(request.POST)
         if miForm.is_valid():
-            #usuario = miForm.cleaned_data.get("username")
             miForm.save()
-            return redirect(reverse_lazy('home'))
+            return redirect(reverse_lazy('index'))
     else:
         miForm = RegistroForm()
 
     return render(request, "sessions/registro.html", {"form": miForm})   
 
-# ____ Edición de Perfil / Avatar
+# Editar el Perfil y Avatar
 
 @login_required
 def editProfile(request):
@@ -304,27 +297,20 @@ def agregarAvatar(request):
         if miForm.is_valid():
             usuario = User.objects.get(username=request.user)
             imagen = miForm.cleaned_data["imagen"]
-            #_________ Borrar avatares viejos
             avatarViejo = Avatar.objects.filter(user=usuario)
             if len(avatarViejo) > 0:
                 for i in range(len(avatarViejo)):
                     avatarViejo[i].delete()
-            #__________________________________________
             avatar = Avatar(user=usuario, imagen=imagen)
             avatar.save()
-
-            #_________ Enviar la imagen al home
             imagen = Avatar.objects.get(user=usuario).imagen.url
             request.session["avatar"] = imagen
-            #____________________________________________________
             return redirect(reverse_lazy("home"))
     else:
         miForm = AvatarForm()
     return render(request, "entidades/agregarAvatar.html", {"form": miForm})  
 
 
-
-#--------------------------------------------------------------------------
 
       
     if category == 'remeras':
