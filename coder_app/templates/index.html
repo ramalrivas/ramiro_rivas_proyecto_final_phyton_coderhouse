@@ -9,29 +9,30 @@
     <title>Contenido Marcial</title>
   
     <link rel="icon" type="image/x-icon" href="{% static 'coder_app/assets/favicon.ico' %}"/>
-
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static '\coder_app\css\styles.css' %}" rel="stylesheet" />
-    <!-- Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+    <link href="{% static '\coder_app\css\styles.css' %}" rel="stylesheet" />    
 
 </head>
 
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
+            <a class="navbar-brand" href="#page-top"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
                 <i class="fas fa-bars ms-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#secciones">Secciones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#portfolio">Los más recomendados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Recomendados</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
                     <li class="nav-item"><a class="nav-link" href="#creator">Creador</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
@@ -39,9 +40,14 @@
                 
                 <div class="d-flex ms-auto align-items-center">
                     {% if user.is_authenticated %}
-                        <p class="mb-0 me-3" style="color:green">[{{ user.first_name }} {{ user.last_name }}]</p>
+                            <img src="{{ request.session.avatar_url }}" alt="Avatar" class="avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <p class="mb-0 me-3" style="color:green; font-weight: bold; text-transform: uppercase; display: inline;">
+                               {{ user.first_name|default:user.username }} {{ user.last_name }}
+                            </p>
+                        </a>
                         <form method="POST" action="{% url 'logout' %}">
                             {% csrf_token %}
+                            <a class="btn btn-primary me-2" href="{% url 'editarPerfil' %}">Editar</a>
                             <button type="submit" class="btn btn-primary me-2">Logout</button>
                         </form>
                     {% else %}
@@ -52,6 +58,12 @@
             </div>
         </div>
     </nav>
+    
+    <script>
+function showEditProfileForm() {
+    document.getElementById('edit-profile-container').style.display = 'block';
+}
+</script>
                             <!-- Bloque Dinamico -->
 
                             {% block contenido %}
@@ -97,21 +109,21 @@
                     </span>
                 </a>
                 <h4 class="my-3">Equipamiento</h4>
-                <p class="text-muted">SECCION EN CONSTRUCCION.</p>
+                    <p class="text-muted">SECCION EN CONSTRUCCION.</p>
             </div>
-            <div class="col-md-4">
-                <a href="{% url 'eventos' %}"> 
-                    <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="far fa-calendar-alt fa-stack-1x fa-inverse"></i>
-                    </span>
-                </a>
-                <h4 class="my-3">Eventos</h4>
-                <p class="text-muted">En esta sección podrás conocer los eventos mas importantes de este apasionante mundo!.</p>
+                <div class="col-md-4">
+                    <a href="{% url 'eventos' %}"> 
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="far fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    <h4 class="my-3">Eventos</h4>
+                    <p class="text-muted">En esta sección podrás conocer los eventos mas importantes de este apasionante mundo!.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
         
         <section class="page-section bg-light" id="portfolio">
@@ -378,12 +390,12 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{% static 'js/scripts.js' %}"></script>
+        <script src="{% static 'coder_app/js/scripts.js' %}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script
-
+        
 </body>
 </html>

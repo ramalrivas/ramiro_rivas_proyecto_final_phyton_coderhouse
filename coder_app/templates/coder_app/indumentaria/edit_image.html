@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Imagen</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
+    <style>
+        .image-preview {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 10%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Editar Imagen</h2>
+    
+    <div class="form-container">
+        <div class="image-preview">
+            <h3>Vista Previa</h3>
+            <img src="{{ form.instance.image.url }}" alt="Imagen Actual">
+            <p>URL de la Imagen: <a href="{{ form.instance.image.url }}" target="_blank">{{ form.instance.image.url }}</a></p>
+        </div>
+        
+        <!-- Formulario de edición -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button">Guardar Cambios</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(blank=True, max_length=255)),
                 ('image', models.ImageField(upload_to='user_images/')),
-                ('category', models.CharField(choices=[('remeras', 'Remeras'), ('hoodies', 'Hoodies'), ('pantalones', 'Pantalones'), ('shorts', 'Shorts'), ('camperas', 'Camperas'), ('zapatillas', 'Zapatillas'), ('botas', 'Botas'), ('carteleras', 'carteleras'), ('galerias', 'Galerias')], max_length=100)),
+                ('category', models.CharField(choices=[('remeras', 'Remeras'), ('hoodies', 'Hoodies'), ('pantalones', 'Pantalones'), ('shorts', 'Shorts'), ('guantes', 'guantes'), ('zapatillas', 'Zapatillas'), ('botas', 'Botas'), ('carteleras', 'carteleras'), ('olimpicos_mundiales', 'olimpicos_mundiales')], max_length=100)),
                 ('uploaded_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

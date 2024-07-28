@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoodies</title>
+    <title>Carteleras</title>
     <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
     <style>
         body {
             font-family: Montserrat, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f7f7f7; /* O el color de fondo que prefieras */
+            background: #f7f7f7; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -27,8 +27,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 10px;
-            width: 100%;
-            max-width: 1200px; /* O el ancho máximo que prefieras */
+            width: 90%;
+            max-width: 1200px; 
             margin-bottom: 20px;
         }
 
@@ -37,8 +37,9 @@
             border-radius: 5px;
             overflow: hidden;
             position: relative;
-            padding-bottom: 50px; /* Agrega espacio en la parte inferior */
-            position: relative; 
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
         }
 
         .image-wrapper img {
@@ -51,11 +52,11 @@
             transform: scale(1.05);
         }
 
-        .image-wrapper a {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            padding: 5px 10px;
+        .image-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .button {
@@ -77,17 +78,19 @@
         }
 
         .button-eliminar {
-            display: block; /* O inline-block, dependiendo de cómo quieras que se comporte el botón */
-            text-align: center; 
-            background-color: #f44336; /* Rojo para eliminar */
-            position: absolute; /* Posiciona absolutamente dentro de image-wrapper */
-            bottom: 10px; /* Distancia desde la parte inferior del contenedor */
-            left: 50%; /* Centra horizontalmente */
-            transform: translateX(-50%); /* Desplazamiento para centrar exactamente */
+            background-color: #f44336;
         }
 
         .button-eliminar:hover {
             background-color: #d32f2f;
+        }
+
+        .button-editar {
+            background-color: #ffa500; /* Color naranja para editar */
+        }
+
+        .button-editar:hover {
+            background-color: #e69500;
         }
 
         .button-inicio {
@@ -100,14 +103,28 @@
 
         .form-container {
             text-align: center;
-            width: 100%;
-            max-width: 1200px; /* O el ancho máximo que prefieras */
+            width: 90%;
+            max-width: 1200px; 
         }
 
         .form-container form {
             margin: 20px 0;
         }
 
+        .messages {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            color: #856404;
+        }
+
+        .messages .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
     </style>
 </head>
 
@@ -122,8 +139,8 @@
     {% endif %}
 
     <div class="form-container">
-        <p><a href="{% url 'indumentaria' %}" class="button button-inicio">Inicio</a></p>
-        <h2>Galería de Hoodies</h2>
+        <p><a href="{% url 'eventos' %}" class="button button-inicio"><< Volver</a></p>
+        <h2>Últimos Eventos</h2>
     </div>
 
     <div class="gallery">
@@ -131,7 +148,10 @@
             <div class="image-wrapper">
                 <img src="{{ image.image.url }}" alt="{{ image.title }}">
                 {% if request.user.is_staff %}
-                    <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
+                    <div class="image-actions">
+                        <a href="{% url 'edit_image' image.id %}" class="button button-editar">Editar</a>
+                        <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
+                    </div>
                 {% endif %}
             </div>
         {% endfor %}
@@ -140,9 +160,38 @@
     <div class="form-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form_hoodies.as_p }}
-            <button type="submit" name="submit_hoodies" class="button">Subir Imagen de Hoodie</button>
+            {{ form_carteleras.as_p }}
+            <div>
+                <label for="id_image">Selecciona una imagen:</label>
+                <input type="file" id="id_image" name="image" accept="image/*">
+            </div>
+            <div id="image-preview" style="margin-top: 20px;">
+                <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none; max-width: 100%; height: auto;">
+            </div>
+            <button type="submit" name="submit_carteleras" class="button">Subir Imagen de Carteleras</button>
         </form>
     </div>
+    <script>
+        document.getElementById('id_image').addEventListener('change', function(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview-image');
+            var file = input.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        });
+    </script>
+    
 </body>
 </html>

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zapatillas</title>
+    <title>Indumentaria - Zapatillas</title>
     <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
     <style>
         body {
             font-family: Montserrat, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f7f7f7; /* O el color de fondo que prefieras */
+            background: #f7f7f7; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,10 +25,10 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            width: 100%;
-            max-width: 1200px; /* O el ancho máximo que prefieras */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px; 
             margin-bottom: 20px;
         }
 
@@ -37,8 +37,9 @@
             border-radius: 5px;
             overflow: hidden;
             position: relative;
-            padding-bottom: 50px; /* Agrega espacio en la parte inferior */
-            position: relative; 
+            padding: 10px; 
+            text-align: center;
+            background-color: #fff; 
         }
 
         .image-wrapper img {
@@ -51,11 +52,19 @@
             transform: scale(1.05);
         }
 
-        .image-wrapper a {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            padding: 5px 10px;
+        .image-details {
+            margin-top: 10px;
+        }
+
+        .image-details h3, .image-details p {
+            margin: 5px 0;
+        }
+
+        .image-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .button {
@@ -77,17 +86,19 @@
         }
 
         .button-eliminar {
-            display: block; 
-            text-align: center; 
-            background-color: #f44336;
-            position: absolute; 
-            bottom: 10px; 
-            left: 50%; 
-            transform: translateX(-50%); 
+            background-color: #f44336; 
         }
 
         .button-eliminar:hover {
             background-color: #d32f2f;
+        }
+
+        .button-editar {
+            background-color: #2196F3; 
+        }
+
+        .button-editar:hover {
+            background-color: #1976D2;
         }
 
         .button-inicio {
@@ -100,43 +111,66 @@
 
         .form-container {
             text-align: center;
-            width: 100%;
-            max-width: 1200px; /* O el ancho máximo que prefieras */
+            width: 90%;
+            max-width: 1200px;
         }
 
         .form-container form {
             margin: 20px 0;
         }
 
+        .messages {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            color: #856404;
+        }
+
+        .messages .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
     </style>
 </head>
 
 <body>
-
     {% if messages %}
         <div class="messages">
             {% for message in messages %}
-                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
             {% endfor %}
         </div>
     {% endif %}
 
     <div class="form-container">
         <p><a href="{% url 'indumentaria' %}" class="button button-inicio"><< Volver</a></p>
-        <h2>Galería de Zapatillas</h2>
+        <h2>Zapatillas para Boxeo</h2>
     </div>
 
     <div class="gallery">
         {% for image in images %}
             <div class="image-wrapper">
                 <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                <div class="image-details">
+                    <h3>{{ image.title }}</h3>
+                    <p>{{ image.description }}</p>
+                </div>
                 {% if request.user.is_staff %}
-                    <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
-                {% endif %}
+                <div class="image-actions">
+                    <form action="{% url 'delete_image_zapatillas' image.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="button button-eliminar">Eliminar</button>
+                    </form>
+                    <a href="{% url 'edit_image_zapatillas' image.id %}" class="button button-editar">Editar</a>
+                </div>
+            {% endif %}
             </div>
         {% endfor %}
     </div>
-
+    {% if request.user.is_staff %}
     <div class="form-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -144,5 +178,6 @@
             <button type="submit" name="submit_zapatillas" class="button">Subir Imagen de Zapatillas</button>
         </form>
     </div>
+    {% endif %}
 </body>
 </html>
