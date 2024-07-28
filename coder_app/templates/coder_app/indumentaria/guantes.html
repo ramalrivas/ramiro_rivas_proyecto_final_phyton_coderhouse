@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indumentaria - guantes</title>
+    <title>Indumentaria - Guantes</title>
     <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
     <style>
         body {
             font-family: Montserrat, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f7f7f7;
+            background: #f7f7f7; /* O el color de fondo que prefieras */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -28,7 +28,7 @@
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             width: 90%;
-            max-width: 1200px;
+            max-width: 1200px; /* O el ancho máximo que prefieras */
             margin-bottom: 20px;
         }
 
@@ -37,9 +37,9 @@
             border-radius: 5px;
             overflow: hidden;
             position: relative;
-            padding: 10px;
+            padding: 10px; /* Agrega espacio alrededor de la imagen */
             text-align: center;
-            background-color: #fff;
+            background-color: #fff; /* Fondo blanco para resaltar la imagen y la información */
         }
 
         .image-wrapper img {
@@ -86,11 +86,19 @@
         }
 
         .button-eliminar {
-            background-color: #f44336;
+            background-color: #f44336; /* Rojo para eliminar */
         }
 
         .button-eliminar:hover {
             background-color: #d32f2f;
+        }
+
+        .button-editar {
+            background-color: #2196F3; /* Azul para editar */
+        }
+
+        .button-editar:hover {
+            background-color: #1976D2;
         }
 
         .button-inicio {
@@ -104,7 +112,7 @@
         .form-container {
             text-align: center;
             width: 90%;
-            max-width: 1200px;
+            max-width: 1200px; /* O el ancho máximo que prefieras */
         }
 
         .form-container form {
@@ -132,14 +140,14 @@
     {% if messages %}
         <div class="messages">
             {% for message in messages %}
-                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
             {% endfor %}
         </div>
     {% endif %}
 
     <div class="form-container">
-        <p><a href="{% url 'indumentaria' %}" class="button button-inicio">Inicio</a></p>
-        <h2>Galería de guantes</h2>
+        <p><a href="{% url 'indumentaria' %}" class="button button-inicio"><< Volver</a></p>
+        <h2>Guantes para Boxeo</h2>
     </div>
 
     <div class="gallery">
@@ -151,21 +159,25 @@
                     <p>{{ image.description }}</p>
                 </div>
                 {% if request.user.is_staff %}
-                    <div class="image-actions">
-                        <a href="{% url 'edit_image' image.id %}" class="button button-editar">Editar</a>
-                        <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
-                    </div>
-                {% endif %}
+                <div class="image-actions">
+                    <form action="{% url 'delete_image_guantes' image.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="button button-eliminar">Eliminar</button>
+                    </form>
+                    <a href="{% url 'edit_image_guantes' image.id %}" class="button button-editar">Editar</a>
+                </div>
+            {% endif %}
             </div>
         {% endfor %}
     </div>
-
+    {% if request.user.is_staff %}
     <div class="form-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form_campera.as_p }}
-            <button type="submit" name="submit_campera" class="button">Subir Imagen de Campera</button>
+            {{ form_guantes.as_p }}
+            <button type="submit" name="submit_guantes" class="button">Subir Imagen de Guantes</button>
         </form>
     </div>
+    {% endif %}
 </body>
 </html>

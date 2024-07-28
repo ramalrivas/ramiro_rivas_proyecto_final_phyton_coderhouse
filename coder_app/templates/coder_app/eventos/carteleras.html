@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carteleras</title>
+    <title>Contenido Marcial - Carteleras</title>
     <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
     <style>
         body {
             font-family: Montserrat, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f7f7f7; 
+            background: #f7f7f7; /* O el color de fondo que prefieras */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,10 +25,10 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
             width: 90%;
-            max-width: 1200px; 
+            max-width: 1200px; /* O el ancho máximo que prefieras */
             margin-bottom: 20px;
         }
 
@@ -37,9 +37,9 @@
             border-radius: 5px;
             overflow: hidden;
             position: relative;
-            padding: 10px;
+            padding: 10px; /* Agrega espacio alrededor de la imagen */
             text-align: center;
-            background-color: #fff;
+            background-color: #fff; /* Fondo blanco para resaltar la imagen y la información */
         }
 
         .image-wrapper img {
@@ -50,6 +50,14 @@
 
         .image-wrapper img:hover {
             transform: scale(1.05);
+        }
+
+        .image-details {
+            margin-top: 10px;
+        }
+
+        .image-details h3, .image-details p {
+            margin: 5px 0;
         }
 
         .image-actions {
@@ -78,7 +86,7 @@
         }
 
         .button-eliminar {
-            background-color: #f44336;
+            background-color: #f44336; /* Rojo para eliminar */
         }
 
         .button-eliminar:hover {
@@ -86,11 +94,11 @@
         }
 
         .button-editar {
-            background-color: #ffa500; /* Color naranja para editar */
+            background-color: #2196F3; /* Azul para editar */
         }
 
         .button-editar:hover {
-            background-color: #e69500;
+            background-color: #1976D2;
         }
 
         .button-inicio {
@@ -104,7 +112,7 @@
         .form-container {
             text-align: center;
             width: 90%;
-            max-width: 1200px; 
+            max-width: 1200px; /* O el ancho máximo que prefieras */
         }
 
         .form-container form {
@@ -129,69 +137,47 @@
 </head>
 
 <body>
-
     {% if messages %}
         <div class="messages">
             {% for message in messages %}
-                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
             {% endfor %}
         </div>
     {% endif %}
 
     <div class="form-container">
         <p><a href="{% url 'eventos' %}" class="button button-inicio"><< Volver</a></p>
-        <h2>Últimos Eventos</h2>
+        <h2>Carteleras para Boxeo</h2>
     </div>
 
     <div class="gallery">
         {% for image in images %}
             <div class="image-wrapper">
                 <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                <div class="image-details">
+                    <h3>{{ image.title }}</h3>
+                    <p>{{ image.description }}</p>
+                </div>
                 {% if request.user.is_staff %}
-                    <div class="image-actions">
-                        <a href="{% url 'edit_image' image.id %}" class="button button-editar">Editar</a>
-                        <a href="{% url 'delete_image' image.id %}" class="button button-eliminar">Eliminar</a>
-                    </div>
-                {% endif %}
+                <div class="image-actions">
+                    <form action="{% url 'delete_image_carteleras' image.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="button button-eliminar">Eliminar</button>
+                    </form>
+                    <a href="{% url 'edit_image_carteleras' image.id %}" class="button button-editar">Editar</a>
+                </div>
+            {% endif %}
             </div>
         {% endfor %}
     </div>
-
+    {% if request.user.is_staff %}
     <div class="form-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form_carteleras.as_p }}
-            <div>
-                <label for="id_image">Selecciona una imagen:</label>
-                <input type="file" id="id_image" name="image" accept="image/*">
-            </div>
-            <div id="image-preview" style="margin-top: 20px;">
-                <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none; max-width: 100%; height: auto;">
-            </div>
             <button type="submit" name="submit_carteleras" class="button">Subir Imagen de Carteleras</button>
         </form>
     </div>
-    <script>
-        document.getElementById('id_image').addEventListener('change', function(event) {
-            var input = event.target;
-            var preview = document.getElementById('preview-image');
-            var file = input.files[0];
-            
-            if (file) {
-                var reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = '#';
-                preview.style.display = 'none';
-            }
-        });
-    </script>
-    
+    {% endif %}
 </body>
 </html>

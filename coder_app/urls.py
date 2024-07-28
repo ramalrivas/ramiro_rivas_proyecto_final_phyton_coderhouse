@@ -42,20 +42,25 @@ urlpatterns = [
     # Botas
     path('upload_image/botas/', upload_image_view, {'template_name': 'coder_app/indumentaria/botas.html', 'redirect_url': 'botas'}, name='upload_image_botas'),
     path('delete_image/<int:pk>/botas/', delete_image, {'redirect_url': 'botas'}, name='delete_image_botas'),
-    path('edit_image/<int:pk>/botas/', edit_image, {'template_name': 'coder_app/indumentaria/edit_image.html', 'redirect_url': 'botas'}, name='edit_image_botas'),
+    path('edit_image/<int:pk>/botas/', edit_image, {'template_name': 'coder_app/edit_image.html', 'redirect_url': 'botas'}, name='edit_image_botas'),
     # Zapatillas
     path('upload_image/zapatillas/', upload_image_view, {'template_name': 'coder_app/indumentaria/zapatillas.html', 'redirect_url': 'zapatillas'}, name='upload_image_zapatillas'),
     path('delete_image/<int:pk>/zapatillas/', delete_image, {'redirect_url': 'zapatillas'}, name='delete_image_zapatillas'),
-    path('edit_image/<int:pk>/zapatillas/', edit_image, {'template_name': 'coder_app/indumentaria/edit_image.html', 'redirect_url': 'zapatillas'}, name='edit_image_zapatillas'),
+    path('edit_image/<int:pk>/zapatillas/', edit_image, {'template_name': 'coder_app/edit_image.html', 'redirect_url': 'zapatillas'}, name='edit_image_zapatillas'),
     # Guantes
-    path('upload_image/botas/', upload_image_view, {'template_name': 'coder_app/indumentaria/botas.html', 'redirect_url': 'botas'}, name='upload_image_botas'),
-    path('delete_image/<int:pk>/botas/', delete_image, {'redirect_url': 'botas'}, name='delete_image_botas'),
-    path('edit_image/<int:pk>/botas/', edit_image, {'template_name': 'coder_app/indumentaria/edit_image.html', 'redirect_url': 'botas'}, name='edit_image_botas'),
+    path('upload_image/guantes/', upload_image_view, {'template_name': 'coder_app/indumentaria/guantes.html', 'redirect_url': 'guantes'}, name='upload_image_guantes'),
+    path('delete_image/<int:pk>/guantes/', delete_image, {'redirect_url': 'guantes'}, name='delete_image_guantes'),
+    path('edit_image/<int:pk>/guantes/', edit_image, {'template_name': 'coder_app/edit_image.html', 'redirect_url': 'guantes'}, name='edit_image_guantes'),
 
     # >>>>>>>>> EVENTOS <<<<<<<<<<
     # Eventos MGM.
-
+    path('upload_image/carteleras/', upload_image_view, {'template_name': 'coder_app/eventos/carteleras.html', 'redirect_url': 'carteleras'}, name='upload_image_carteleras'),
+    path('delete_image/<int:pk>/carteleras/', delete_image, {'redirect_url': 'carteleras'}, name='delete_image_carteleras'),
+    path('edit_image/<int:pk>/carteleras/', edit_image, {'template_name': 'coder_app/edit_image.html', 'redirect_url': 'carteleras'}, name='edit_image_carteleras'),
     # Eventos Olímpicos-Mundiales.
+    path('upload_image/olimpicos_mundiales/', upload_image_view, {'template_name': 'coder_app/eventos/olimpicos_mundiales.html', 'redirect_url': 'olimpicos_mundiales'}, name='upload_image_olimpicos_mundiales'),
+    path('delete_image/<int:pk>/olimpicos_mundiales/', delete_image, {'redirect_url': 'olimpicos_mundiales'}, name='delete_image_olimpicos_mundiales'),
+    path('edit_image/<int:pk>/olimpicos_mundiales/', edit_image, {'template_name': 'coder_app/edit_image.html', 'redirect_url': 'olimpicos_mundiales'}, name='edit_image_olimpicos_mundiales'),
 
 ]
 

@@ -71,11 +71,18 @@ function showEditProfileForm() {
                             {% endblock contenido %}  
                             
                             <!-- Bloque Dinamico -->
-    <header class="masthead">
+        <header class="masthead">
                 <div class="masthead-subheading">Bienvenido a Contenido Marcial</div>
                 <div class="masthead-heading text-uppercase">EL OBJETIVO ES CLARO...</div>
                 
                 <a class="btn btn-primary btn-xl text-uppercase" href="#secciones">Contenido Exclusivo</a>
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
             </div>
         </header>
        

@@ -11,7 +11,7 @@ class Avatar(models.Model):
         return f"{self.user.username}"
     
 
-# ------------------ MANEJO DE LAS IMAGENES --------------
+# ------------------ POSTEOS (EDIT, DELETE, UPLOAD) --------------
 class Image(models.Model):
     CATEGORY_CHOICES = (
 
@@ -33,3 +33,4 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title if self.title else f"Image {self.id}"
+    
