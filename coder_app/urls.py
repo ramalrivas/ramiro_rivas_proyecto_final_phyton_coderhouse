@@ -5,10 +5,8 @@ from django.contrib.auth.views import LogoutView
 from . import views
 from .views import *
 
-
-
-
 urlpatterns = [
+
 #INDEX 
     path('', views.index, name='index'),
 
@@ -61,6 +59,12 @@ urlpatterns = [
     path('upload_image/olimpicos_mundiales/', upload_image_view, {'template_name': 'coder_app/eventos/olimpicos_mundiales.html', 'redirect_url': 'olimpicos_mundiales'}, name='upload_image_olimpicos_mundiales'),
     path('delete_image/<int:pk>/olimpicos_mundiales/', delete_image, {'redirect_url': 'olimpicos_mundiales'}, name='delete_image_olimpicos_mundiales'),
     path('edit_image/<int:pk>/olimpicos_mundiales/', edit_image, {'template_name': 'coder_app/edit_image.html', 'redirect_url': 'olimpicos_mundiales'}, name='edit_image_olimpicos_mundiales'),
+
+# COMENTARIOS (UPLOAD, DELETE, EDIT)
+    path('comentario/agregar/', views.agregar_comentario, name='agregar_comentario'),
+    path('comentario/<int:pk>/editar/', views.editar_comentario, name='editar_comentario'),
+    path('comentario/<int:pk>/eliminar/', views.eliminar_comentario, name='eliminar_comentario'),
+    path('comentarios/', views.listar_comentarios, name='listar_comentarios'),
 
 ]
 

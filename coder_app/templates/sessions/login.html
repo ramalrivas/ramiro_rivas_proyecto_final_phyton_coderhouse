@@ -3,7 +3,7 @@
 {% block contenido %}
 <div id="login-container" class="border p-4 bg-light rounded shadow position-fixed bottom-0 end-0 m-3" style="width: 300px;">
     <h2 class="mb-4 text-center" style="color: black;">Iniciar Sesión</h2>
-    <form id="login-form" action="" method="post" class="needs-validation" novalidate>
+    <form id="login-form" action="{% url 'login' %}" method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         <div class="mb-3">
             {{ form.username.label_tag }}

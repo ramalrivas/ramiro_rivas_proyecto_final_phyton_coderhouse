@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmar Eliminación</title>
+</head>
+<body>
+    <h2>¿Estás seguro de que deseas eliminar este comentario?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar Eliminación</button>
+        <a href="{% url 'index' %}">Cancelar</a>
+    </form>
+</body>
+</html>

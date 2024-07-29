@@ -42,7 +42,7 @@
                     {% if user.is_authenticated %}
                             <img src="{{ request.session.avatar_url }}" alt="Avatar" class="avatar" style="width: 40px; height: 40px; border-radius: 50%;">
                             <p class="mb-0 me-3" style="color:green; font-weight: bold; text-transform: uppercase; display: inline;">
-                               {{ user.first_name|default:user.username }} {{ user.last_name }}
+                               {{ user.username }} 
                             </p>
                         </a>
                         <form method="POST" action="{% url 'logout' %}">
@@ -71,18 +71,11 @@ function showEditProfileForm() {
                             {% endblock contenido %}  
                             
                             <!-- Bloque Dinamico -->
-        <header class="masthead">
+    <header class="masthead">
                 <div class="masthead-subheading">Bienvenido a Contenido Marcial</div>
                 <div class="masthead-heading text-uppercase">EL OBJETIVO ES CLARO...</div>
                 
                 <a class="btn btn-primary btn-xl text-uppercase" href="#secciones">Contenido Exclusivo</a>
-                {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
             </div>
         </header>
        
@@ -244,7 +237,42 @@ function showEditProfileForm() {
         </div>
     </div>
 </section>
-       
+
+{% load l10n %}
+<section class="page-section bg-light" id="comments">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Comentarios</h2>
+            
+            {% if user.is_authenticated %}
+                <div id="user-functions">
+                    <a href="{% url 'agregar_comentario' %}" class="btn btn-primary">Agregar Comentario</a>
+                </div>
+            {% endif %}
+
+            <div id="listar_comentarios">
+                {% if comentarios %}
+                    {% for comentario in comentarios %}
+                        <div class="comment">
+                            <p><strong>{{ comentario.usuario.first_name }} - {{ comentario.usuario.username }}</strong>: {{ comentario.contenido }}</p>
+                            <p><small>Publicado el {{ comentario.fecha_publicacion|localize }}</small></p>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'editar_comentario' comentario.id %}" class="btn btn-secondary">Editar</a>
+                                <form action="{% url 'eliminar_comentario' comentario.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No hay comentarios aún.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+  
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
@@ -296,7 +324,7 @@ function showEditProfileForm() {
                 </form>
             </div>
         </section>
-       
+
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
@@ -314,7 +342,6 @@ function showEditProfileForm() {
             </div>
         </footer>
         
-       
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

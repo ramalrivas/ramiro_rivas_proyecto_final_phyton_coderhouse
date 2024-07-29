@@ -14,14 +14,11 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 
 
-
-
-
 # ------------------------- INDEX -------------------------
 
-
 def index(request):
-    return render(request, 'index.html')
+    comentarios = Comentario.objects.all() 
+    return render(request, 'index.html', {'comentarios': comentarios})
 
 # ------------------------- MENSAJES DE SISTEMA -------------------------
 def mensajes(request):
@@ -141,7 +138,6 @@ def edit_image(request, pk, template_name, redirect_url):
     return render(request, template_name, {'form': form, 'image': image})
 
 
-
 # ------------------------- SECCIÓN EVENTOS -------------------------
 def eventos(request):
     return render(request, 'coder_app/eventos.html')
@@ -219,10 +215,10 @@ def zapatillas(request):
             image.uploaded_by = request.user
             image.category = 'zapatillas'
             image.save()
-            messages.success(request, 'Imagen de zapatilla subida correctamente.')
+            messages.success(request, 'Imagen de zapatillas subida correctamente.')
             return redirect('zapatillas')
         else:
-            messages.error(request, 'Error al subir la imagen de hoodie.')
+            messages.error(request, 'Error al subir la imagen de Zapatillas.')
     else:
         form_zapatillas = ImageUploadForm()
     
@@ -244,7 +240,7 @@ def guantes(request):
             messages.success(request, 'Imagen de campera subida correctamente.')
             return redirect('guantes')
         else:
-            messages.error(request, 'Error al subir la imagen de campera.')
+            messages.error(request, 'Error al subir la imagen de Guantes.')
     else:
         form_campera = ImageUploadForm()
 
@@ -252,5 +248,41 @@ def guantes(request):
     return render(request, 'coder_app/indumentaria/guantes.html', {'images': images_guantes, 'form_campera': form_campera})
 pass
 
+# COMENTARIOS (UPLOAD, DELETE, EDIT)
 
+@login_required
+def agregar_comentario(request):
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.usuario = request.user
+            comentario.save()
+            return redirect('/#comments')
+    else:
+        form = ComentarioForm()
+    return render(request, 'coder_app/comentarios/comentario_form.html', {'form': form})
 
+@login_required
+def editar_comentario(request, pk):
+    comentario = get_object_or_404(Comentario, pk=pk)
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST, instance=comentario)
+        if form.is_valid():
+            form.save()
+            return redirect('/#comments')
+    else:
+        form = ComentarioForm(instance=comentario)
+    return render(request, 'coder_app/comentarios/comentario_form.html', {'form': form})
+
+@login_required
+def eliminar_comentario(request, pk):
+    comentario = get_object_or_404(Comentario, pk=pk)
+    if request.method == 'POST':
+        comentario.delete()
+        return redirect('/#comments')
+    return render(request, 'coder_app/comentarios/confirmar_eliminacion.html', {'comentario': comentario})
+
+def listar_comentarios(request):
+    comentarios = Comentario.objects.all()
+    return render(request, 'coder_app/comentarios/comentarios_list.html', {'comentarios': comentarios})

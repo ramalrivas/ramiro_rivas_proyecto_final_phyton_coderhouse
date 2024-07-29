@@ -1,11 +1,10 @@
 from django import forms
 from .models import *
-from django import forms 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm 
 
 
-# ------------------------- MANEJO DE SESION DE USUARIOS, REGISTRO, AVATAR, PERFIL -------------------------
+# PERFIL DE USUARIOS (REGISTRO, LOGIN/LOGOUT, EDITAR PERFIL Y AVATAR)
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(label="Nombre de usuario", max_length=254, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -32,7 +31,7 @@ class AvatarForm(forms.ModelForm):
         model = Avatar
         fields = ['imagen']
 
-# ------------------------- CARGA DE CONTENIDO -------------------------
+# POSTEO DE CONTENIDO (UPLOAD, DELETE, EDIT)
 
 class ImageUploadForm(forms.ModelForm):
     class Meta:
@@ -43,3 +42,10 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['title', 'description', 'image']
+
+# COMENTARIOS (UPLOAD, DELETE, EDIT)
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ['contenido']
