@@ -25,4 +25,7 @@
 
 *[Conclusión](#conclusión)
 
-<h3>(#Descripción del Proyecto.)</h3>
+<h3>Descripción del proyecto.</h3>
+<p>
+Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
+</p>
