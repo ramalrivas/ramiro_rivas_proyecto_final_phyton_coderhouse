@@ -30,7 +30,7 @@
 
 <h3>Estado del proyecto.</h3>
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto se encuentra en desarrollo. Se crearon las funciones de Manejo de Sesión, Comentarios, Indumentaria y Eventos. En la proxima etapa se van a definir los roles de Usuario Editor y Usuario Visitante, en ambos casos van a pasar por el proceso de Registro y tambien se va a dar funcionalidad a la Sección de Contacto, Recomendados, y equipamiento. 
 </p>
 
 <h3>Características de la aplicación y demostración.</h3>
