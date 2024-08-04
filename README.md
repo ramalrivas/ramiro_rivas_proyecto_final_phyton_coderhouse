@@ -23,7 +23,7 @@
 
 ## Tecnologías y requirements.txt.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad e instalar todas las librerias dependencias se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal.
 
 
 Contenido requirements.txt:
