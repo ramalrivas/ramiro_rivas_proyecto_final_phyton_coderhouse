@@ -17,9 +17,9 @@
 
 ## Características de la aplicación y demostración.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de Landing page. En la carpeta video_demo del repositorio encontrarás un video con la explicación basica del Sitio y de la Aplicación.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de Landing page. En el video que se ve a continuación se hace una breve muestra del proyecto. Sin embargo, lo ideal es realizar pruebas de todas las funcionalidades.
 
-
+[![Video Thumbnail](https://img.youtube.com/vi/SVDO9Aa9XvQ/0.jpg)](https://www.youtube.com/watch?v=SVDO9Aa9XvQ)
 
 ## Tecnologías y requirements.txt.
 
