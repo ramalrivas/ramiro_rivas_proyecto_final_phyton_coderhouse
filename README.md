@@ -2,6 +2,7 @@
 <h2 align="center"> Proyecto Final de Ramiro Rivas. Curso Phyton CoderHouse </h2>
 <p align="left">
    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+   <img src="https://img.shields.io/badge/Realease%20Date-Agosto%202024-green">
    <img src="https://img.shields.io/badge/LICENSE-Ramiro%20L.%20Rivas-blue">
    </p>
 
@@ -35,5 +36,15 @@
 
 ## Características de la aplicación y demostración.
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de landing page. En la carpeta video_demo del repositorio encontrarás un video con la explicación basica del Sitio y de la Aplicación. Para mas información ingresa a este enlace.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de Landing page. En la carpeta video_demo del repositorio encontrarás un video con la explicación basica del Sitio y de la Aplicación.
+</p>
+
+## Tecnologías y requirements.txt.
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de landing page. En la carpeta video_demo del repositorio encontrarás un video con la explicación basica del Sitio y de la Aplicación.
+</p>
+
+## Desarrollador.
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El Sitio Web y la Aplicación son desarrollados por Ramiro Leonel Rivas para el Curso de Phyton de CoderHouse. Corresponde a la entrega final.
 </p>
