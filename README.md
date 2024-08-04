@@ -23,6 +23,8 @@
 
 *[Conclusión](#conclusión)
 
+<h2> CONTENIDO MARCIAL - El objetivo es Claro... </h2>
+
 <h3>Descripción del proyecto.</h3>
 <p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
@@ -35,5 +37,5 @@
 
 <h3>Características de la aplicación y demostración.</h3>
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de landing page. En la carpeta video_demo del repositorio encontrarás un video con la explicación basica del Sitio y de la Aplicación. Para mas información ingresa a este enlace.
 </p>
