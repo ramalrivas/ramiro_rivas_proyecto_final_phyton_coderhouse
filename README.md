@@ -41,7 +41,8 @@
 
 ## Tecnologías y requirements.txt.
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad e instalar todas las dependencias se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad e instalar todas las dependencias se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal.
+</p>
 El contenido del archivo es el siguiente:
 - asgiref==3.8.1
 - Django==5.0.7
@@ -51,7 +52,6 @@ El contenido del archivo es el siguiente:
 - pillow==10.4.0
 - sqlparse==0.5.0
 - tzdata==2024.1
-</p>
 
 ## Desarrollador.
 <p>
