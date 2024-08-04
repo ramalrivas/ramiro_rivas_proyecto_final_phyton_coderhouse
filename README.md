@@ -4,7 +4,7 @@
    <img src="https://img.shields.io/badge/LICENSE-Ramiro%20L.%20Rivas-blue">
    </p>
 
-##Índice
+<h2> - Indice - </h2>
 
 *[Descripción del proyecto](#descripción-del-proyecto)
 
