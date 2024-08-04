@@ -31,7 +31,7 @@ urlpatterns = [
     path('eventos/carteleras/', views.carteleras, name='carteleras'),  
     path('eventos/olimpicos_mundiales/', views.olimpicos_mundiales, name='olimpicos_mundiales'), 
     
-    # Equipamiento
+    # Equipamiento - EN CONSTRUCCION
     # path(path('equipamiento/', views.equipamiento, name='equipamiento')
 
 # POSTEO DE CONTENIDO (UPLOAD, DELETE, EDIT)
