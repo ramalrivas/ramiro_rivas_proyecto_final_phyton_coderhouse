@@ -1,13 +1,10 @@
-<h1 align="center"> CONTENIDO MARCIAL </h1>
+<h1 align="center"> CONTENIDO MARCIAL - El Objetivo es claro... </h1>
 <h2 align="center"> Proyecto Final de Ramiro Rivas. Curso Phyton CoderHouse </h2>
 <p align="left">
    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
    <img src="https://img.shields.io/badge/LICENSE-Ramiro%20L.%20Rivas-red">
-   <img src="https://img.shields.io/badge/RELEASE%20DATE-Agosto%202024-blue">
+   <img src="https://img.shields.io/badge/LAST%20UPDATE-Agosto%202024-blue">
 </p>
-
-# CONTENIDO MARCIAL - El objetivo es Claro... 
-
 
 ## Descripción del proyecto.
 
@@ -26,7 +23,7 @@
 
 ## Tecnologías y requirements.txt.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad e instalar todas las dependencias se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad e instalar todas las librerias dependencias se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal.
 
 
 Contenido requirements.txt:
