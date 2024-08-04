@@ -41,6 +41,7 @@ class Image(models.Model):
 
 class Comentario(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, blank=True)
     contenido = models.TextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
@@ -48,5 +49,4 @@ class Comentario(models.Model):
         return f'Comentario de {self.usuario.username} - {self.fecha_publicacion}'
 
     def fecha_publicacion_formateada(self):
-        # Define el formato deseado aquí
         return self.fecha_publicacion.strftime('%A, %d de %B de %Y. %H:%M')

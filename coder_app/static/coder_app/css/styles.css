@@ -22132,3 +22132,21 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.comment p {
+    margin: 0;
+}
+
+.comment p strong {
+    display: block;
+    font-weight: bold;
+}
+
+.comment .comment-content {
+    font-style: italic;
+}
+
+.comment p small {
+    color: #555; 
+
+}

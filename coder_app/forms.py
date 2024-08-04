@@ -48,4 +48,4 @@ class ImageForm(forms.ModelForm):
 class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ['contenido']
+        fields = ['title', 'contenido']

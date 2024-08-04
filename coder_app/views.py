@@ -14,18 +14,17 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 
 
-# ------------------------- INDEX -------------------------
-
+# INDEX 
 def index(request):
     comentarios = Comentario.objects.all() 
     return render(request, 'index.html', {'comentarios': comentarios})
 
-# ------------------------- MENSAJES DE SISTEMA -------------------------
+# MENSAJES DE SISTEMA 
 def mensajes(request):
     messages.success(request, 'Operación exitosa.')
     return redirect('index')
 
-# ------------------------- MANEJO DE SESION DE USUARIOS, REGISTRO, AVATAR, PERFIL, -------------------------
+# MANEJO DE SESION DE USUARIOS, REGISTRO, AVATAR, PERFIL
 
 def loginRequest(request):
     if request.method == "POST":
@@ -93,7 +92,7 @@ def editProfile(request):
     return render(request, "sessions/editarPerfil.html", {"user_form": user_form, "avatar_form": avatar_form})
 
 
-# ------------------------------ IMAGENES ----------------------
+# CARDS Y CONTENIDO (UPLOAD, DELETE, EDIT)
 
 @login_required
 def upload_image_view(request, template_name, redirect_url):
@@ -137,8 +136,8 @@ def edit_image(request, pk, template_name, redirect_url):
         form = ImageForm(instance=image)
     return render(request, template_name, {'form': form, 'image': image})
 
+# SECCIÓN EVENTOS
 
-# ------------------------- SECCIÓN EVENTOS -------------------------
 def eventos(request):
     return render(request, 'coder_app/eventos.html')
 
@@ -161,7 +160,6 @@ def olimpicos_mundiales(request):
     return render(request, 'coder_app/eventos/olimpicos_mundiales.html', {'images': images_olimpicos_mundiales, 'form_olimpicos_mundiales': form_olimpicos_mundiales})
 pass
 
-
 def carteleras(request):
     if request.method == 'POST' and 'submit_carteleras' in request.POST:
         form_carteleras = ImageUploadForm(request.POST, request.FILES)
@@ -181,11 +179,10 @@ def carteleras(request):
     return render(request, 'coder_app/eventos/carteleras.html', {'images': images_carteleras, 'form_carteleras': form_carteleras})
 pass
 
+# SECCION INDUMENTARIA
 
-# ------------------------------- SECCION INDUMENTARIA -------------------------
 def indumentaria(request):
     return render(request, 'coder_app/indumentaria.html')
-
 
 def botas(request):
     if request.method == 'POST':
@@ -204,8 +201,6 @@ def botas(request):
         images_botas = Image.objects.filter(category='botas')  
     return render(request, 'coder_app/indumentaria/botas.html', {'images': images_botas, 'form_botas': form_botas})
 pass
-
-
 
 def zapatillas(request):
     if request.method == 'POST' and 'submit_zapatillas' in request.POST:
@@ -226,27 +221,25 @@ def zapatillas(request):
     return render(request, 'coder_app/indumentaria/zapatillas.html', {'images': images_zapatillas, 'form_zapatillas': form_zapatillas})
 pass
 
-
- 
-def guantes(request):
+def remeras(request):
     
     if request.method == 'POST':
-        form_campera = ImageUploadForm(request.POST, request.FILES)
-        if form_campera.is_valid():
-            image = form_campera.save(commit=False)
+        form_remera = ImageUploadForm(request.POST, request.FILES)
+        if form_remera.is_valid():
+            image = form_remera.save(commit=False)
             image.uploaded_by = request.user
-            image.category = 'guantes'  
+            image.category = 'remeras'  
             image.save()
-            messages.success(request, 'Imagen de campera subida correctamente.')
-            return redirect('guantes')
+            messages.success(request, 'Imagen de remera subida correctamente.')
+            return redirect('remeras')
         else:
-            messages.error(request, 'Error al subir la imagen de Guantes.')
+            messages.error(request, 'Error al subir la imagen de Remera.')
     else:
-        form_campera = ImageUploadForm()
+        form_remera = ImageUploadForm()
 
-    images_guantes = Image.objects.filter(category='guantes')  
-    return render(request, 'coder_app/indumentaria/guantes.html', {'images': images_guantes, 'form_campera': form_campera})
-pass
+    images_remeras = Image.objects.filter(category='remeras')  
+    return render(request, 'coder_app/indumentaria/remeras.html', {'images': images_remeras, 'form_remera': form_remera})
+
 
 # COMENTARIOS (UPLOAD, DELETE, EDIT)
 

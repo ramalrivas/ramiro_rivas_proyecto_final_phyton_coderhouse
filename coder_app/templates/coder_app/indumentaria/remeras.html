@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indumentaria - Guantes</title>
+    <title>Indumentaria - Remeras</title>
     <link rel="stylesheet" type="text/css" href="{% static 'coder_app/css/styles.css' %}">
     <style>
         body {
@@ -147,7 +147,7 @@
 
     <div class="form-container">
         <p><a href="{% url 'indumentaria' %}" class="button button-inicio"><< Volver</a></p>
-        <h2>Guantes para Boxeo y Artes Marciales</h2>
+        <h2>Remeras para Boxeo</h2>
     </div>
 
     <div class="gallery">
@@ -160,11 +160,11 @@
                 </div>
                 {% if request.user.is_staff %}
                 <div class="image-actions">
-                    <form action="{% url 'delete_image_guantes' image.id %}" method="post" style="display: inline;">
+                    <form action="{% url 'delete_image_remeras' image.id %}" method="post" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="button button-eliminar">Eliminar</button>
                     </form>
-                    <a href="{% url 'edit_image_guantes' image.id %}" class="button button-editar">Editar</a>
+                    <a href="{% url 'edit_image_remeras' image.id %}" class="button button-editar">Editar</a>
                 </div>
             {% endif %}
             </div>
@@ -174,8 +174,8 @@
     <div class="form-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form_guantes.as_p }}
-            <button type="submit" name="submit_guantes" class="button">Subir Imagen de Guantes</button>
+            {{ form_remeras.as_p }}
+            <button type="submit" name="submit_remeras" class="button">Subir Imagen de Remeras</button>
         </form>
     </div>
     {% endif %}
