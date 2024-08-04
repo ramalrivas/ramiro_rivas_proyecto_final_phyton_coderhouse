@@ -7,11 +7,11 @@
 
 <h2> - Indice - </h2>
 
-*[Descripción del proyecto](#descripción-del-proyecto)
+*[Descripción del proyecto.](#Descripción-del-proyecto.)
 
-*[Estado del proyecto](#Estado-del-proyecto)
+*[Estado del proyecto.](#Estado-del-proyecto.)
 
-*[Características de la aplicación y demostración](#Características-de-la-aplicación-y-demostración)
+*[Características de la aplicación y demostración.](#Características-de-la-aplicación-y-demostración.)
 
 *[Acceso al proyecto](#acceso-proyecto)
 
@@ -25,5 +25,15 @@
 
 <h3>Descripción del proyecto.</h3>
 <p>
-&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
+</p>
+
+<h3>Estado del proyecto.</h3>
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
+</p>
+
+<h3>Características de la aplicación y demostración.</h3>
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contenido Marcial es un sitio web enfocado en brindar y compartir información sobre Artes Marciales y Deportes de Combate. El contenido esta compuesto por información sobre Fechas de los eventos mas importantes, la Indumentaria y Equipamiento mas importante para el Entrenamiento y la Competencia.
 </p>
