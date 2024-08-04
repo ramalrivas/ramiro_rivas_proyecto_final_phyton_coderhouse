@@ -2,8 +2,8 @@
 <h2 align="center"> Proyecto Final de Ramiro Rivas. Curso Phyton CoderHouse </h2>
 <p align="left">
    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+   <img src="https://img.shields.io/badge/LICENSE-Ramiro%20L.%20Rivas-red">
    <img src="https://img.shields.io/badge/Realease%20Date-Agosto%202024-green">
-   <img src="https://img.shields.io/badge/LICENSE-Ramiro%20L.%20Rivas-blue">
    </p>
 
 <h2> - Indice - </h2>
@@ -41,7 +41,16 @@
 
 ## Tecnologías y requirements.txt.
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es un sitio Web con características tanto de One page como de landing page. En la carpeta video_demo del repositorio encontrarás un video con la explicación basica del Sitio y de la Aplicación.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El proyecto esta desarrollado principalmente en Django, Bootstrap. Para mayor compatibilidad e instalar todas las dependencias se recomienda la instalación del archivo requirements.txt a través de <i>pip install -r requirements.txt</i> en la terminal. 
+El contenido del archivo es el siguiente:
+- asgiref==3.8.1
+- Django==5.0.7
+- django-ckeditor==6.7.1
+- django-ckeditor-5==0.2.13
+- django-js-asset==2.2.0
+- pillow==10.4.0
+- sqlparse==0.5.0
+- tzdata==2024.1
 </p>
 
 ## Desarrollador.
